@@ -31,6 +31,8 @@ urls:
       url: /about/
     - text: Raspberry
       url: /category/raspberry
+    - text: Kalliope
+      url: /category/kalliope
     - text: XML Feed
       url: /feed.xml
 
