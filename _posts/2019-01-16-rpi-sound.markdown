@@ -1,0 +1,78 @@
+---
+layout: post
+title:  "Manage and configure sound on Raspberry Pi"
+date:   2019-01-16 08:37:12 +0100
+categories: [raspberry]
+---
+#### Output (headset, speakers)
+Get possible outputs:
+```
+aplay -l
+```
+
+Output example:
+```
+**** List of PLAYBACK Hardware Devices ****
+card 0: ALSA [bcm2835 ALSA], device 0: bcm2835 ALSA [bcm2835 ALSA]
+  Subdevices: 7/7
+  Subdevice #0: subdevice #0
+  Subdevice #1: subdevice #1
+  Subdevice #2: subdevice #2
+  Subdevice #3: subdevice #3
+  Subdevice #4: subdevice #4
+  Subdevice #5: subdevice #5
+  Subdevice #6: subdevice #6
+card 0: ALSA [bcm2835 ALSA], device 1: bcm2835 ALSA [bcm2835 IEC958/HDMI]
+  Subdevices: 1/1
+  Subdevice #0: subdevice #0
+```
+
+Here:
+* Card 0, device 0 is the analog audio (jack).
+* Card 0, device 1 is the HDMI output.
+
+#### Input (mic)
+Get possible inputs:
+```
+arecord -l
+```
+
+Output example:
+```
+**** List of CAPTURE Hardware Devices ****
+card 1: AK5371 [AK5371], device 0: USB Audio [USB Audio]
+  Subdevices: 1/1
+  Subdevice #0: subdevice #0
+```
+
+Here:
+* Card 1, device 0 is the USB mic.
+
+
+#### Configure
+This is a configuration file to output sounds on analog audio and record sounds on the USB mic.
+
+In `/home/pi/.asoundrc`
+```
+pcm.!default {
+   type asym
+   playback.pcm {
+     type plug
+     slave.pcm "hw:0,0"
+   }
+   capture.pcm {
+     type plug
+     slave.pcm "hw:1,0"
+   }
+}
+```
+Restart alsa with `sudo /etc/init.d/alsa-utils restart`.
+
+Configure USB mic gain and sensibility or headset volume level with `alsamixer` command.
+
+#### Test
+To record a sound with the configured mic, run `rec test.wav`.
+
+To list a sound with the configured output, run `mplayer test.wav`.
+
+Source: [Kalliope installation guide](https://kalliope-project.github.io/kalliope/installation/raspbian/)
