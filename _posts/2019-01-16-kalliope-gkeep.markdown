@@ -33,6 +33,6 @@ The given synapse example must be created in `brains/`. The given template examp
           split_word: "et"
           pin_list: True
           file_template: "templates/gkeep.j2"
-``
+```
 {% endraw %}
 Source: [Kalliope Gkeep neuron](https://github.com/corus87/gkeep-neuron)
