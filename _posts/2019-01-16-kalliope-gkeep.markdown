@@ -16,10 +16,10 @@ Follow the instructions from the [github page](https://github.com/corus87/gkeep-
 The given synapse example must be created in `brains/`. The given template example must be created in `templates/`. If you copy/paste the example neuron, the template name must be `gkeep.j2`.
 
 ### Example
-```
+{% raw %}
 - name: "add-shopping-list"
     signals:
-      - order: "Ajoute du \{\{items\}\} à la liste des courses"
+      - order: "Ajoute du {{items}} à la liste des courses"
       - order: "Ajoute des {{items}} à la liste des courses"
       - order: "Ajoute de l'{{items}} à la liste des courses"
     neurons:
@@ -32,5 +32,5 @@ The given synapse example must be created in `brains/`. The given template examp
           split_word: "et"
           pin_list: True
           file_template: "templates/gkeep.j2"
-```
+{% endraw %}
 Source: [Kalliope Gkeep neuron](https://github.com/corus87/gkeep-neuron)
