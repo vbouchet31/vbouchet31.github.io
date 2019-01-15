@@ -30,7 +30,7 @@ urls:
     - text: About Me
       url: /about/
     - text: Raspberry
-      url: /category/respberry
+      url: /category/raspberry
     - text: XML Feed
       url: /feed.xml
 
