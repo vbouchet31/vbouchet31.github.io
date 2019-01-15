@@ -1,0 +1,23 @@
+---
+layout: post
+title:  "Enable wifi on headless Raspberry Pi"
+date:   2019-01-15 15:03:23 +0100
+categories: [raspberry]
+---
+I wanted to connect my Raspberry to the wifi without first connecting it to ethernet, ssh and updating the configuration.
+
+To do it, I placed a file named `wpa_supplicant.conf` at the root of the sd card. Then copy/paste the following code and adapt the required variables such as the network SSID and the key.
+
+```
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
+country=FR
+
+network={
+    ssid="«your_SSID»"
+    psk="«your_PSK»"
+    key_mgmt=WPA-PSK
+}
+```
+
+Source: [Stackexchange](https://raspberrypi.stackexchange.com/questions/10251/prepare-sd-card-for-wifi-on-headless-pi)

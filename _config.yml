@@ -1,13 +1,11 @@
-title: Stack Problems
-description: My Personal Stack Problems
-author: Agus Makmun
-github: https://github.com/agusmakmun
-about: I am freelance developer. Currently doing more in backend, focused in Python and Django.
-disqus_shortname: stackproblems
-google_analytics: UA-XXXXXXXX-Y
-avatar_url: /static/img/avatar.jpg
+title: Not a blog but personal notes.
+description:
+author: Vincent Bouchet
+github: https://github.com/vbouchet31
+about: I am a Drupal architect, runner and traveler.
+avatar_url: /static/img/avatar.png
 
-enableTags: true
+enableTags: false
 tagarray: []
 
 collections:
@@ -16,30 +14,27 @@ collections:
     permalink: /project/:path/
 
 social:
-    - icon: fa-facebook
-      link: "#"
     - icon: fa-twitter
-      link: "https://twitter.com/agusmakmun6"
+      link: "https://twitter.com/vbouchet31"
     - icon: fa-linkedin
-      link: "https://www.linkedin.com/in/summonagus"
-    - icon: fa-stack-exchange
-      link: "#"
+      link: "https://www.linkedin.com/in/vbouchet"
     - icon: fa-github
-      link: "https://github.com/agusmakmun"
+      link: "https://github.com/vbouchet31"
+    - icon: fa-strava
+      link: "https://www.strava.com/athletes/6922811"
 
 share:
-  twitter_username: agusmakmun6
-  fb_appid: 1749788565247320
+  twitter_username: vbouchet31
 
 urls:
     - text: About Me
       url: /about/
-    - text: My Projects
-      url: /projects/
+    - text: Raspberry
+      url: /category/respberry
     - text: XML Feed
       url: /feed.xml
 
-url: "https://agusmakmun.github.io"
+url: "https://vbouchet31.github.io"
 baseurl: ""
 paginate: 20
 per_page: 20

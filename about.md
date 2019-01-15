@@ -4,6 +4,4 @@ title: About
 permalink: /about/
 ---
 
-I am freelance developer. Currently doing more in backend, focused in Python and Django.
-
-email: agus[at]python.web.id
+I am a Drupal architect currentyl working at [Acquia](https://acquia.com). I like to run and travel during my personal time.
