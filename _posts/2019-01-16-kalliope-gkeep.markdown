@@ -19,7 +19,7 @@ The given synapse example must be created in `brains/`. The given template examp
 ```
 - name: "add-shopping-list"
     signals:
-      - order: "Ajoute du `{{items}}` à la liste des courses"
+      - order: "Ajoute du \{\{items\}\} à la liste des courses"
       - order: "Ajoute des {{items}} à la liste des courses"
       - order: "Ajoute de l'{{items}} à la liste des courses"
     neurons:
