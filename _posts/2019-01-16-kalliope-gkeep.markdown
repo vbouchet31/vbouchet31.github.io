@@ -17,6 +17,7 @@ The given synapse example must be created in `brains/`. The given template examp
 
 ### Example
 {% raw %}
+```
 - name: "add-shopping-list"
     signals:
       - order: "Ajoute du {{items}} à la liste des courses"
@@ -26,11 +27,12 @@ The given synapse example must be created in `brains/`. The given template examp
       - gkeep:
           login: "<email>"
           password: "<password>"
-          list: "shopping"
+          list: "shopping"`
           items: "{{ items }}"
           option: "add"
           split_word: "et"
           pin_list: True
           file_template: "templates/gkeep.j2"
+``
 {% endraw %}
 Source: [Kalliope Gkeep neuron](https://github.com/corus87/gkeep-neuron)
