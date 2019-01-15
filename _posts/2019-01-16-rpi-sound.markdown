@@ -4,7 +4,7 @@ title:  "Manage and configure sound on Raspberry Pi"
 date:   2019-01-16 08:37:12 +0100
 categories: [raspberry]
 ---
-#### Output (headset, speakers)
+### Output (headset, speakers)
 Get possible outputs:
 ```
 aplay -l
@@ -31,7 +31,7 @@ Here:
 * Card 0, device 0 is the analog audio (jack).
 * Card 0, device 1 is the HDMI output.
 
-#### Input (mic)
+### Input (mic)
 Get possible inputs:
 ```
 arecord -l
@@ -49,7 +49,7 @@ Here:
 * Card 1, device 0 is the USB mic.
 
 
-#### Configure
+### Configure
 This is a configuration file to output sounds on analog audio and record sounds on the USB mic.
 
 In `/home/pi/.asoundrc`
@@ -70,7 +70,7 @@ Restart alsa with `sudo /etc/init.d/alsa-utils restart`.
 
 Configure USB mic gain and sensibility or headset volume level with `alsamixer` command.
 
-#### Test
+### Test
 To record a sound with the configured mic, run `rec test.wav`.
 
 To list a sound with the configured output, run `mplayer test.wav`.
