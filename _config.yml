@@ -14,8 +14,6 @@ collections:
     permalink: /project/:path/
 
 social:
-    - icon: fa-twitter
-      link: "https://twitter.com/vbouchet31"
     - icon: fa-linkedin
       link: "https://www.linkedin.com/in/vbouchet"
     - icon: fa-github
@@ -23,16 +21,11 @@ social:
     - icon: fa-strava
       link: "https://www.strava.com/athletes/6922811"
 
-share:
-  twitter_username: vbouchet31
-
 urls:
     - text: About Me
       url: /about/
-    - text: Raspberry
-      url: /category/raspberry
-    - text: Kalliope
-      url: /category/kalliope
+    - text: Drupal
+      url: /category/drupal
     - text: XML Feed
       url: /feed.xml
 
