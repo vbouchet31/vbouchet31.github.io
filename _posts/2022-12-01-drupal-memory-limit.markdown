@@ -93,3 +93,20 @@ If a policy applies, headers will indicate the name of the policy and the new me
 limit applied.
 
 ![](/assets/2022-12-01-drupal-memory-limit/memory-limit-headers.png)
+
+Finally, export the configuration and push to your version control.
+
+```yml
+id: image_style
+label: 'Image style'
+weight: null
+status: true
+memory: 256M
+langcode: en
+policy_constraints:
+  -
+    id: path
+    negate: false
+    paths: '/sites/default/files/styles/*'
+dependencies: {  }
+```
