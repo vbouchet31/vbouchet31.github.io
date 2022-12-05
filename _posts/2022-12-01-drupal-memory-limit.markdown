@@ -41,7 +41,7 @@ Once the module is enabled, policies are listed in
 Configuration > Performance > Memory Limit Policy > Policies
 (/admin/config/performance/memory-limit-policy/list).
 
-![]({{ "/static/img/_posts/2022-12-01-drupal-memory-limit/memory-limit-list.png" | relative_url}})
+![]({{ "/assets/2022-12-01-drupal-memory-limit/memory-limit-list.png" | relative_url}})
 
 To create a new policy, click the "Add Policy" button.
 
@@ -51,7 +51,7 @@ policy will apply when the conditions are met ("256M" in our example). The forma
 100K for 100 kilobytes, 100M for 100 megabytes and 1G for 1 gigabytes. This is the same
 format which is used in php.ini to configure the global memory limit.
 
-![](/static/img/_posts/2022-12-01-drupal-memory-limit/memory-limit-create-step-1.png)
+![](/assets/2022-12-01-drupal-memory-limit/memory-limit-create-step-1.png)
 
 The second step of the policy setup is to configure the constraints which determine if the
 policy applies. Be sure to enable some Memory Limit Policy sub-modules which provide
@@ -59,7 +59,7 @@ some constraint method or to create your own one. If you don't configure any con
 the policy will always apply. If that is really what you want to do, probably using a module
 is not the best choice and update the PHP configuration globally is a better one.
 
-![](/static/img/_posts/2022-12-01-drupal-memory-limit/memory-limit-create-step-2.png)
+![](/assets/2022-12-01-drupal-memory-limit/memory-limit-create-step-2.png)
 
 Each constraint will come with its own configuration form. It is possible to negate the
 constraint. For example, if you need to increase the memory on all frontend pages but not
@@ -67,13 +67,13 @@ on the admin ones, it can be achieved by using the "Path" constraint with "/admi
 negate option. In our example, we will use the "Path" constraint and enter "/sites/default/files/styles/*"
 as the path.
 
-![](/static/img/_posts/2022-12-01-drupal-memory-limit/memory-limit-create-step-path.png)
+![](/assets/2022-12-01-drupal-memory-limit/memory-limit-create-step-path.png)
 
-![](/static/img/_posts/2022-12-01-drupal-memory-limit/memory-limit-create-step-2-bis.png)
+![](/assets/2022-12-01-drupal-memory-limit/memory-limit-create-step-2-bis.png)
 
 Finally, click the "Finish" button to get the constraints saved. The policy is now listed.
 
-![](/static/img/_posts/2022-12-01-drupal-memory-limit/memory-limit-list-2.png)
+![](/assets/2022-12-01-drupal-memory-limit/memory-limit-list-2.png)
 
 All the policies listed will be evaluated. In some situation, it may be needed to
 order the policies using drag & drop.
@@ -83,9 +83,9 @@ a policy is applied, we can use the setting to add the memory information in the
 
 If no policy applies, then headers will only indicate the default memory limit.
 
-![](/static/img/_posts/2022-12-01-drupal-memory-limit/memory-limit-headers-2.png)
+![](/assets/2022-12-01-drupal-memory-limit/memory-limit-headers-2.png)
 
 If a policy applies, the headers will indicate the name of the policy and the new memory
 limit applied.
 
-![](/static/img/_posts/2022-12-01-drupal-memory-limit/memory-limit-headers.png)
+![](/assets/2022-12-01-drupal-memory-limit/memory-limit-headers.png)
