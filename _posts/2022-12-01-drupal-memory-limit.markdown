@@ -41,7 +41,7 @@ Once the module is enabled, policies are listed in
 Configuration > Performance > Memory Limit Policy > Policies
 (/admin/config/performance/memory-limit-policy/list).
 
-![]({{ "/assets/2022-12-01-drupal-memory-limit/memory-limit-list.png" | relative_url}})
+![](/assets/2022-12-01-drupal-memory-limit/memory-limit-list.png)
 
 To create a new policy, click the "Add Policy" button.
 
