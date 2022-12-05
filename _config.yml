@@ -30,7 +30,7 @@ urls:
       url: /feed.xml
 
 url: "https://vbouchet31.github.io"
-baseurl: "vbouchet31.github.io"
+baseurl: ""
 paginate: 20
 per_page: 20
 paginate_path: "/page/:num/"
