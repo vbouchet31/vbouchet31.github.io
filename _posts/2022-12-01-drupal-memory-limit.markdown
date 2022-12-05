@@ -45,7 +45,7 @@ Configuration > Performance > Memory Limit Policy > Policies
 
 ![](/assets/2022-12-01-drupal-memory-limit/memory-limit-list.png)
 
-To create a new policy, click the "Add Policy" button.
+To create a new policy, click the "+ Add Policy" button.
 
 It displays the first step of
 the policy configuration. You must give a name to the policy ("Image style" in our example) and choose the memory that the
@@ -81,13 +81,15 @@ All the policies listed will be evaluated. In some situation, it may be needed t
 order the policies using drag & drop.
 
 For some complex cases, it may be difficult to evaluate if a policy apply. To validate
-a policy is applied, we can use the setting to add the memory information in the headers.
+a policy is applied, we can use the setting to add the memory information in the headers. The setting
+can be set in Configuration > Performance > Memory Limit Policy > Configuration
+(/admin/config/performance/memory-limit-policy/settings).
 
-If no policy applies, then headers will only indicate the default memory limit.
+If no policy applies, headers will only indicate the default memory limit.
 
 ![](/assets/2022-12-01-drupal-memory-limit/memory-limit-headers-2.png)
 
-If a policy applies, the headers will indicate the name of the policy and the new memory
+If a policy applies, headers will indicate the name of the policy and the new memory
 limit applied.
 
 ![](/assets/2022-12-01-drupal-memory-limit/memory-limit-headers.png)
