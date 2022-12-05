@@ -10,26 +10,28 @@ PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to all
 ```
 
 This happens when a PHP process is reaching his memory limit and cannot achieve the
-task it has been requested. Multiple situations can be the reason if this error. From image
+task it has been requested. Multiple situations can be the reason of this error. From image
 manipulations to migrations or wrong designed code for example. Before
 updating the memory allocated to PHP, it is always better to investigate the 
 process causing the issue as increasing the memory may be a temporary patch before
 the new limit is reached in case the root cause is code design.
 
-But there are some operation like image manipulation, media upload, etc which are
-valid scenarios and require more memory for PHP processes. The most straightforward
+However, there are some operation like image manipulation, media upload, etc which are
+valid scenarios that require more memory for PHP processes. The most straightforward
 fix is to increase the memory limit allowed per PHP process. This is valid if your
 entire application is memory consuming and globally require more memory. But in most of
 the cases, these are very specific operations which are reaching the limit. Increasing
-the memory globally is not a good idea as it means less PHP processes in parallel. If
+the memory globally is not a good idea as it means less PHP processes in parallel. In short, if
 PHP has access to 1G and is configured to grant 512M to each PHP process, that would
-mean your application can only serve 2 requests in parallel.
+mean your application can only serve 2 requests in parallel. Keeping the memory limit to 128M and
+conditionally increasing the limit to 512M for the few expensive processes is a much better
+use of the available memory.
 
 This is where I introduce [Memory Limit Policy](https://www.drupal.org/project/memory_limit_policy)
 module which can be used to configure policies to conditionally increase the memory
 limit. It comes with different plugins to alter the memory based on the path, a query argument,
 the user role, the route name or the HTTP method for example. There is even a plugin to
-increase memory on Drush commands (it comes with some [limitation](https://www.drupal.org/project/memory_limit_policy/issues/3276442)). Plugins can be combined
+increase memory on Drush commands (please note that it comes with some [limitation](https://www.drupal.org/project/memory_limit_policy/issues/3276442)). Plugins can be combined
 to be more restrictive on when to change the memory limit. It is designed to be easy to extend as policies 
 are plugins which mean you can create your own policy if your conditions are very
 specific.
