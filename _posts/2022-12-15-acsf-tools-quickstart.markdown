@@ -8,7 +8,7 @@ Acquia Cloud Site Factory (aka ACSF) is the Acquia solution to ease Drupal multi
 
 #### Why you need ACSF Tools?
 As a maintainer of sites hosted on an ACSF instance, you may have to execute a Drush command on all sites of
-your factory. Out of the box, the only way to do it is to manually do something like
+your factory. Out of the box, the only way to do it is to manually do something like:
 ```shell
 drush -l site1.application.acsitefactory.com command
 drush -l site2.application.acsitefactory.com command
@@ -27,13 +27,8 @@ ACSF maintains a file `sites.json` in `/mnt/files/{$_ENV['AH_SITE_GROUP']}.{$_EN
 which contains the list of the sites with their related informations like the database details, the domains, etc. This is
 the file that acsf-tools will leverage to get the list of sites and basically generate the various `drush -l <site> <command>`.
 
-Because acsf-tools relies on a file managed by ACSF directly on the Acquia servers, it is not possible to use the
-drush aliases out of the box. To do so, most of the command accept the `--alias=application.env` option. Using
-this option will use the `drush @application.env rsync` command to download the `sites.json` file from the given alias
-and use it to then generate and execute the `drush @application.env -l <site> <command>` commands.
-
 #### ACSF Tools List command
-The first command is `acsf-tools-list` which simply list down the sites of the factory with some basic informations.
+The first command is `acsf-tools-list` which simply list down the sites of the factory with some basic information.
 
 ```shell
 $ drush acsf-tools-list
@@ -104,7 +99,7 @@ executed requires arguments or options. The pattern is `drush acsf-tools-ml <com
 The command also comes with many options.
 
 By default, `acsf-tools-ml` command will use the second domain in the list if any. The reason is that the first domain
-is always the technical domain provided by ACSF (<site>.<application>.acsitefactory.com). The second domain is
+is always the technical domain provided by ACSF (site.application.acsitefactory.com). The second domain is
 the one configured as the live domain. If there is any other custom domain, they will be listed after. There may be some
 situation where the drush command should be executed on one of the custom domain. Using the `--domain-pattern` option
 can help to achieve this.
@@ -167,3 +162,70 @@ executing the command on the next site, it will check if the total time limit is
 
 The other options are default drush ones. The `--format` option to choose the format of the response. The `--fields` option
 to choose which fields to return.
+
+#### ACSF Tools MLC command
+The command `acsf-tools-mlc` is very similar to `acsf-tools-ml` as the `c` stands for "concurrent". The only
+difference is the `--concurrency-limit` option to restrict the number of sites to execute in parallel.
+
+#### ACSF Tools Dump and Restore commands
+Taking database dumps alone is not really useful if these can't be restored easily. The `acsf-tools-dump` command
+is a wrapper around the drush `sql-dump` command and will automatically use the site name as the filename
+of the dump. It allows to easily map the dump file with a site and to automate restoration via `acsf-tools-restore`.
+
+By default, the `acsf-tools-dump` command stores the dump files into `~/drush-backups/YYYYmmdd-hhmm/`. It is possible
+to specify a specific folder using the `--result-folder` option. Any other option given to the command will be
+forwarded to the `sql-dump` command. For example, using the `--gzip` option will result in dumps being compressed.
+```
+$ drush acsf-tools-dump --result-folder=/tmp/my-backup --gzip
+ Are you sure you want to take database dumps of all the sites of the factory in /tmp/my-backup. (yes/no) [yes]:
+ > yes
+
+ Target directory (/tmp/my-backup) does not exist. Do you want to create this directory? (yes/no) [yes]:
+ > yes
+
+=> Creating /tmp/my-backup directory ...
+
+ [OK] Folder /tmp/my-backup has been created.
+
+
+=> Taking database dump of site1 ...
+
+ [OK] Database dump of dhuae site successfully saved in /tmp/my-backup/site1.sql.gz. 
+
+
+=> Taking database dump of site2 ...
+
+ [OK] Database dump of dhuae site successfully saved in /tmp/my-backup/site2.sql.gz.                                                                                                            
+```
+
+To restore the dumps taken, simply use the `acsf-tools-restore` command. Specify the source folder and if the
+dumps are gzipped.
+
+```
+$ drush acsf-tools-restore --source-folder=/tmp/my-backup --gzip
+You are about to run a command on all the sites of your factory.
+        Do you confirm you want to do that? If so, type 'yes'
+
+ Do you want to continue? (yes/no) [yes]:
+ > yes
+
+
+=> Restoring the Database on the Domain site1.application.com.
+
+=> Dropping and restoring database on site1.application.com Completed.
+
+=> Restoring the Database on the Domain site2.application.com.
+
+=> Dropping and restoring database on site2.application.com Completed.
+```
+
+#### Using drush aliases
+Because acsf-tools relies on a file managed by ACSF directly on the Acquia servers, it is possible to use the
+drush aliases only if acsf-tools is installed on the target server.
+
+For example, `drush @application.env acsf-tools-ml cr` will first ssh on `@application.env` and then execute
+`drush acsf-tools-ml cr`.
+
+If acsf-tools is not installed on the server, most of the command accept the `--alias=application.env` option. Using
+this option will use the `drush @application.env rsync` command to download the `sites.json` file from the given alias
+and use it to then generate and execute the `drush @application.env -l <site> <command>` commands.
