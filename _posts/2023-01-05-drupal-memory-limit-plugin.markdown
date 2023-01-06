@@ -8,12 +8,13 @@ This small post is to describe how to create a plugin for the [Memory Limit Poli
 
 ## The context
 For this exercise, we will assume that our site has a content type "Article" which has a "Tags" field. This "Tags" field
-is an entity reference to one or multiple taxonomy terms from the "Tags" vocabulary. If the field is filled, a
-process is triggered to determine the best articles to suggest based on the selected tags. Because of the complexity of
-this process, it appears that if the field has more than 2 values, the default PHP memory_limit of 128M is not enough.
+is an entity reference to one or multiple taxonomy terms from the "Tags" vocabulary. 
+When the article is being displayed, ff the "tags" field is filled, a process is triggered to determine the best articles
+to suggest to the visitor based on the selected tags. Because of the complexity of this process, it appears that if the
+field has more than 2 values, the default PHP memory_limit of 128M is not enough.
 
 In that context, we can't simply use the "Path" constraint plugin from memory limit policy as we would like to increase
-the memory limit based on the "tags" field being filled with more than 2 values.
+the memory limit based on the "tags" field being filled with more than 2 values only, not on all the article pages.
 
 ## The plugin
 Assuming we have a module `project_article` to handle the custom code around the article feature. We first need to add
@@ -75,7 +76,7 @@ class TaggedArticles extends MemoryLimitConstraintBase implements ContainerFacto
 
 We now need to update the `evaluate` method to return `TRUE` only if the current page is an `article` node and if the `tags` field
 has more than 2 values. We can use the [`current_route_match`](https://api.drupal.org/api/drupal/core%21core.services.yml/service/current_route_match/10) service from
-Drupal core to determine the route and get the parameters we need to determine if the constraint applies or not.
+Drupal core to determine the route and get the parameters we need to decide if the constraint applies or not.
 After updating the `create` method to invoke the `current_route_match` service, defining a `__construct` method to access the service and
 updating the `evaluate` method, our `TaggedArticles.php` plugin looks like this:
 
@@ -180,7 +181,7 @@ constraint to apply.
 We need to implement the `buildConfigurationForm` and `submitConfigurationForm` method and define the schema of our configuration.
 
 We create a `config/schema/memory_limit_policy_tagged_articles.schema.yml` file in the `project_article` module. Our
-configuration will be very simple as it only contains the number of tags to be filled for the constraint to apply.
+configuration will be very simple as it only defines the number of tags to be filled for the constraint to apply.
 
 ```yaml
 memory_limit_policy.constraint.plugin.tagged_articles:
@@ -191,7 +192,7 @@ memory_limit_policy.constraint.plugin.tagged_articles:
       label: 'Number of tags threshold'
 ```
 
-The configuration form only have an input field to enter the number of tags. We can update the `getSummary` method so,
+The configuration form only have one input field to enter the number of tags. We can update the `getSummary` method so,
 it displays the entered value. We finally need to update the `evaluate` method to use the configured value as the
 threshold. Here is the final code of our plugin:
 
@@ -316,3 +317,6 @@ class TaggedArticles extends MemoryLimitConstraintBase implements ContainerFacto
   }
 }
 ```
+
+if you fill the plugin you wrote is generic enough to be used by other projects, feel free to open an issue on the
+[memory limit policy module's issue queue](https://www.drupal.org/project/issues/memory_limit_policy).
