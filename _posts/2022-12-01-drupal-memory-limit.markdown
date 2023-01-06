@@ -4,6 +4,7 @@ title:  "Conditionally increase the PHP memory limit on Drupal"
 date:   2022-12-01 17:00:00 +0100
 categories: [drupal]
 ---
+## Why the module?
 On any Drupal projects, you may face this kind of logs:
 ```
 PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 6369280 bytes) in ...
@@ -27,15 +28,23 @@ mean your application can only serve 2 requests in parallel. Keeping the memory 
 conditionally increasing the limit to 512M for the few expensive processes is a much better
 use of the available memory.
 
+## What the module offers?
 This is where I introduce [Memory Limit Policy](https://www.drupal.org/project/memory_limit_policy)
 module which can be used to configure policies to conditionally increase the memory
-limit. It comes with different plugins to alter the memory based on the path, a query argument,
-the user role, the route name or the HTTP method for example. There is even a plugin to
-increase memory on Drush commands (please note that it comes with some [limitation](https://www.drupal.org/project/memory_limit_policy/issues/3276442)). Plugins can be combined
-to be more restrictive on when to change the memory limit. It is designed to be easy to extend as policies 
-are plugins which mean you can create your own policy if your conditions are very
-specific.
+limit.
 
+At the time I write this post, it comes with different plugins to alter the memory based on:
+- The path
+- The presence of a query argument
+- The user role
+- The route name
+- The HTTP method
+- The Drush command (please note that it comes with some [limitation](https://www.drupal.org/project/memory_limit_policy/issues/3276442)).
+
+Plugins can be combined to be more restrictive on when to change the memory limit. It is designed to be easy to extend 
+as policies are plugins which mean you can create your own policy if your conditions are very specific.
+
+## How to configure the module?
 Let's quickly dive into the module configuration and say we want to increase the
 memory allocated to the process which generate image presets to 256M.
 
