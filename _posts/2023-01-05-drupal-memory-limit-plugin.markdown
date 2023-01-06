@@ -1,10 +1,10 @@
 ---
 layout: post
 title:  "Create a plugin for Memory Limit Policy"
-date:   2023-01-06 17:00:00 +0100
+date:   2023-01-05 17:00:00 +0100
 categories: [drupal]
 ---
-This small post is to describe how to create a plugin for [Memory Limit Policy module](https://www.drupal.org/project/memory_limit_policy).
+This small post is to describe how to create a plugin for the [Memory Limit Policy module](https://www.drupal.org/project/memory_limit_policy).
 
 ## The context
 For this exercise, we will assume that our site has a content type "Article" which has a "Tags" field. This "Tags" field
